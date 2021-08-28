@@ -1,0 +1,30 @@
+{% extends "base.html.twig" %}
+
+{% block title "Agence immo" %}
+
+{% block body %}
+    <div class="jumbotron text-center" >
+        <h1>Ma Super agence</h1>
+        <p>If you’re using our compiled JavaScript and prefer to include Popper separately, add Popper before our JS, via a CDN preferably.</p>
+    </div>
+
+    <div class="container">
+        <h2>Nos derniers biens</h2>
+        <div class="row flex">
+            {% for property in properties %}
+                <div class="col-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a href="{{ path('property.show', {id: property.id, slug: property.slug}) }} ">{{ property.title }} </a>
+                            </h5>
+                            <p class="card-title">{{ property.city }} ( {{ property.postalCode }} ) </p>
+                            <div class="text-primary" style="font-weight:bold;font-size:2rem;">{{ property.price }}$ </div>
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

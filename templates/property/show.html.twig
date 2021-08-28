@@ -1,0 +1,92 @@
+{% extends "base.html.twig" %}
+
+{% block title property.title %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="container p-4">
+            <div class="row">
+                <div class="col-md-8">
+                    {% if property.filename %}
+                    <img src="{{ vich_uploader_asset(property, 'imageFile')| imagine_filter('medium') }}" alt="" class="card-img-top">
+                    {% else %}
+                    <img src="{{ '/images/properties/pexel.jpeg' | imagine_filter('medium') }}" alt="" class="card-img-top">
+                    {% endif %}
+                </div>
+                <div class="col-md-4">
+                    <h1>{{ property.title }} </h1>
+                    <h2>{{ property.room }} piece - {{ property.surface }} m2 </h2>
+                    <div class="text-primary" style="font-size: 2rem;font-weight: bold;">{{ property.price }} $</div>
+                    <a href="#" class="btn btn-primary" id="contactButton" {% if form.vars.submitted %}style="display:none;" {% endif %}
+                     onclick="visible()">Contacter l'agence</a>
+                    <div id="contactForm" class="mt-4" {% if not form.vars.submitted %}style="display:none;" {% endif %}>
+                        {{ form_start(form) }}
+                        <div class="row">
+                            <div class="col">{{ form_row(form.firstname) }} </div>
+                            <div class="col">{{ form_row(form.lastname) }} </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">{{ form_row(form.phone) }} </div>
+                            <div class="col">{{ form_row(form.email) }} </div>
+                        </div>
+                        {{ form_rest(form) }}
+                        <div class="form-group">
+                            <button class="btn btn-primary">Envoyer</button>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-4">
+
+        <p>{{ property.description | nl2br }} </p>
+
+        <div class="row">
+            <div class="col-md-8">
+                <h2>Caracteristiques</h2>
+                <table class="table table-striped">
+                    <tr>
+                        <td>Surface habitable</td>
+                        <td>{{ property.surface }} m2 </td>
+                    </tr>
+                    <tr>
+                        <td>Pieces</td>
+                        <td>{{ property.room }} </td>
+                    </tr>
+                    <tr>
+                        <td>Chambre</td>
+                        <td>{{ property.bedroom }}</td>
+                    </tr>
+                    <tr>
+                        <td>Etages</td>
+                        <td>{{ property.floor }}</td>
+                    </tr>
+                    <tr>
+                        <td>Chauffage</td>
+                        <td>{{ property.heatType }}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-4">
+                <h2>Specificites</h2>
+                <ul class="list-group">
+                    {% for option in property.options %}
+                        <li class="list-group-item">{{ option.name }} </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+<script>
+    function visible(){
+        document.getElementById("contactButton").style.color ="black ";
+        document.getElementById("contactForm").style.display ="visible ";
+    }
+</script>
+{% endblock %}
