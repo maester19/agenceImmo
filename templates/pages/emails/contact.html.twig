@@ -1,0 +1,28 @@
+<table border="0" cellspadding="0" cellspacing="0" role="presentation" style="width:100%"> 
+    <tr>
+        <td align="left" >
+            <table cellspacing="0" cellspadding="0" width="100%" border="0">
+                <tr>
+                    <td>Prenom</td>
+                    <td>{{ contact.firstname }}</td>
+                </tr>
+                <tr>
+                    <td>Nom</td>
+                    <td>{{ contact.lastname }}</td>
+                </tr>
+                <tr>
+                    <td>Telephone</td>
+                    <td>{{ contact.phone }}</td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>{{ contact.email }}</td>
+                </tr>
+                <tr>
+                    <td>Message</td>
+                    <td>{{ contact.message | nl2br }}</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>

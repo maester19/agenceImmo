@@ -52,7 +52,7 @@ class PropertyController extends AbstractController
      * @return Response
      */
 
-     public function show(Properties $property, string $slug, Request $request):response
+     public function show(Properties $property, string $slug, Request $request, ContactNotification $notification):response
      {
          if($property->getSlug() !== $slug)
          {
@@ -68,7 +68,7 @@ class PropertyController extends AbstractController
          $form->handleRequest($request);
 
          if ($form->isSubmitted() && $form->isValid()) {
-            //$notification->notify($contact);
+            $notification->notify($contact);
              $this->addFlash('success', 'Votre email a bien ete envoyer');
              return $this->redirectToRoute("property.show", [
                 "id"     => $property->getId(),
