@@ -10,7 +10,7 @@ import './styles/app.css';
 
 // start the Stimulus application
 import 'select2/dist/js/select2'
-import 'jquery/dist/jquery'
+import 'jquery'
 import 'bootstrap/dist/js/bootstrap'
 import '@popperjs/core/dist/cjs/popper'
 

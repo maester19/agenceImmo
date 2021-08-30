@@ -3,14 +3,12 @@
 namespace App\Notification;
 
 use App\Entity\Contact;
-use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
 use Twig\Environment;
 
 class ContactNotification {
 
     /**
-     * @var MailerInterface
+     * @var \Swift_Mailer
      */
     private $mailer;
 
@@ -19,19 +17,18 @@ class ContactNotification {
      */
     private $renderer;
 
-    public function __construct(MailerInterface $mailer, Environment $renderer)
+    public function __construct(\Swift_Mailer $mailer, Environment $renderer)
     {
         $this->mailer = $mailer;
         $this->renderer = $renderer;
     } 
 
     public function notify(Contact $contact) {
-       $message = (new Email())
-            ->subject('Agence : '. $contact->getProperty()->getTitle())
-            ->from('noreply@agence.fr')
-            ->to('contact@agence.fr')
-            ->replyTo($contact->getEmail())
-            ->html($this->renderer->render('pages/emails/contact.html.twig', [
+       $message = (new \Swift_Message('Agence : '. $contact->getProperty()->getTitle()))
+            ->setFrom('noreply@agence.fr')
+            ->setTo('contact@agence.fr')
+            ->setReplyTo($contact->getEmail())
+            ->setBody($this->renderer->render('pages/emails/contact.html.twig', [
                 'contact' => $contact
             ]), 'text/html');
 

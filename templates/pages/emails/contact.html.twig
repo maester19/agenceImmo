@@ -3,6 +3,10 @@
         <td align="left" >
             <table cellspacing="0" cellspadding="0" width="100%" border="0">
                 <tr>
+                    <td>Nomdu bien</td>
+                    <td><a href="{{ url('property.show', {'id': contact.property.id, 'slug': contact.property.slug}) }}">{{ contact.property.title }} </a></td>
+                </tr>
+                <tr>
                     <td>Prenom</td>
                     <td>{{ contact.firstname }}</td>
                 </tr>

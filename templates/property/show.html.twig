@@ -6,6 +6,17 @@
 
     <div class="container">
         <div class="container p-4">
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+            {% if not form.vars.valid  %}
+                <div class="alert alert-danger">
+                    Erreur de validation du formulaire de contact 
+                </div>
+            {% endif %}
             <div class="row">
                 <div class="col-md-8">
                     {% if property.filename %}
@@ -80,13 +91,4 @@
             </div>
         </div>
     </div>
-{% endblock %}
-
-{% block script %}
-<script>
-    function visible(){
-        document.getElementById("contactButton").style.color ="black ";
-        document.getElementById("contactForm").style.display ="visible ";
-    }
-</script>
 {% endblock %}
